@@ -3,6 +3,8 @@ import shutil
 from os.path import isfile, join
 from collections import Counter
 import json
+
+
 onlyfiles = [f for f in listdir('new') if isfile(join('new', f))]
 onlyfiles.sort()
 for fname in onlyfiles:
