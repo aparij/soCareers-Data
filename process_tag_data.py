@@ -5,7 +5,7 @@ from collections import Counter
 import json
 
 
-onlyfiles = [f for f in listdir('new') if isfile(join('new', f))]
+onlyfiles = [f for f in listdir('new') if isfile(join('new', f)) and f.endswith("json")]
 onlyfiles.sort()
 for fname in onlyfiles:
     with open(join('new',fname)) as f:
@@ -18,7 +18,7 @@ for fname in onlyfiles:
                 c[tag] += 1
     print(fname,c.most_common(10))
     with open(join('result','tags','tags-%s'%fname),'w+') as f:
-        json.dump(dict(c), f)
+        json.dump(c.most_common(), f)
     with open(join('result', 'jobs_count.csv'),'a+') as f:
         f.write(','.join([fname,str(total_rows),'\n']))
 
