@@ -74,17 +74,28 @@ for tag in current_tags["tags"]:
         rank = tag["rank"]
     changes.append({"tag": tag["tag"], "rank": int(rank), "change": int(change)})
 
+topChanges = {}
 sortedlist = sorted(changes, key=lambda k: k['rank'])
 #take from the top 25 tech
 sortedTop25 = sorted(sortedlist[0:24], key=lambda k: k['change'])
-print(sortedTop25[-5:])
+winners = sortedTop25[-5:]
+winners.reverse()
+topChanges["top25"]={'winners': winners, 'losers':sortedTop25[0:5]}
+
 #take from the top 50 tech
 sortedTop50 = sorted(sortedlist[0:49], key=lambda k: k['change'])
-print(sortedTop50[-5:])
+winners = sortedTop50[-5:]
+winners.reverse()
+topChanges["top50"]={'winners': winners, 'losers':sortedTop50[0:5]}
+
+
+
 #take from the  ALL tech
 sortedTopALL = sorted(sortedlist, key=lambda k: k['change'])
-print(sortedTopALL[-5:])
+winners = sortedTopALL[-5:]
+winners.reverse()
+topChanges["topALL"]={'winners': winners, 'losers':sortedTopALL[0:5]}
 
 
 with open(join('result', 'top_changes.json'), 'w+') as f:
-    json.dump(sortedlist, f)
+    json.dump(topChanges, f)

@@ -39,7 +39,8 @@ synonyms = {
     'twitter-bootstrap': 'bootstrap',
     'amazon-web-services': 'aws',
     'vue': 'vue.js',
-    'vuejs': 'vue.js'
+    'vuejs': 'vue.js',
+    'postgres': 'postgresql'
 }
 onlyfiles = [f for f in listdir('new') if isfile(join('new', f)) and f.endswith("json")]
 onlyfiles.sort()
