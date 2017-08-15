@@ -80,13 +80,13 @@ sortedlist = sorted(changes, key=lambda k: k['rank'])
 sortedTop25 = sorted(sortedlist[0:24], key=lambda k: k['change'])
 winners = sortedTop25[-5:]
 winners.reverse()
-topChanges["top25"]={'winners': winners, 'losers':sortedTop25[0:5]}
+topChanges["top25"]={'best': winners, 'worst': sortedTop25[0:5]}
 
 #take from the top 50 tech
 sortedTop50 = sorted(sortedlist[0:49], key=lambda k: k['change'])
 winners = sortedTop50[-5:]
 winners.reverse()
-topChanges["top50"]={'winners': winners, 'losers':sortedTop50[0:5]}
+topChanges["top50"]={'best': winners, 'worst': sortedTop50[0:5]}
 
 
 
@@ -94,7 +94,7 @@ topChanges["top50"]={'winners': winners, 'losers':sortedTop50[0:5]}
 sortedTopALL = sorted(sortedlist, key=lambda k: k['change'])
 winners = sortedTopALL[-5:]
 winners.reverse()
-topChanges["topALL"]={'winners': winners, 'losers':sortedTopALL[0:5]}
+topChanges["topALL"]={'best': winners, 'worst':sortedTopALL[0:5]}
 
 
 with open(join('result', 'top_changes.json'), 'w+') as f:

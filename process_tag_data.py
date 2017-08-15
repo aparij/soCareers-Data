@@ -5,6 +5,7 @@ from collections import Counter
 import json
 
 synonyms = {
+    'html5': 'html',
     'golang': 'go',
     'node': 'node.js',
     'nodejs': 'node.js',
