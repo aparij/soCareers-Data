@@ -14,6 +14,7 @@ synonyms = {
     'angular': 'angularjs',
     'angular.js': 'angularjs',
     'angular2': 'angularjs',
+    'angular4': 'angularjs',
     'angular-2': 'angularjs',
     'angular-js': 'angularjs',
     'python-2.7': 'python',
@@ -41,6 +42,7 @@ synonyms = {
     'twitter-bootstrap': 'bootstrap',
     'amazon-web-services': 'aws',
     'vue': 'vue.js',
+    'vue2': 'vue.js',
     'vuejs': 'vue.js',
     'postgres': 'postgresql'
 }

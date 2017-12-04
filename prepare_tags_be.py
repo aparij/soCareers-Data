@@ -33,28 +33,39 @@ for fname in onlyfiles:
         break
 year_ago_data = None
 current_tags = None
+processed_data = {}
 for fname in onlyfiles:
     with open(join('result','tags',fname)) as f:
+        rank = 1
         data = json.load(f)
         current_date = fname[9:19]
-        #TODO make num_jobs read from another file
         current_tags = {"date": current_date, "num_jobs": jobs_count[current_date], "tags": []}
-        rank = 1
         for k,v in data:
-            #we don't want insignificant terms , typos , etc..
-            if v > 1:
-                current_tags["tags"].append({
-                    "tag": k,
-                    "perc": "{0:.2f}".format((v*1.0/current_tags["num_jobs"])*100),
-                    "rank": rank
-                })
-                rank +=1
-
-        processed_data.append(current_tags)
+          #we don't want insignificant terms , typos , etc..
+          if v > 1:
+            #old style calculation
+            current_tags["tags"].append({
+                "tag": k,
+                "perc": "{0:.2f}".format((v*1.0/current_tags["num_jobs"])*100),
+                "rank": rank
+            })
+            newData = {
+                "rank": rank,
+                "perc": "{0:.2f}".format((v*1.0/jobs_count[current_date])*100),
+                "dateScraped": current_date 
+            }
+            if k in processed_data:
+                print(k,processed_data[k])
+                processed_data[k].append(newData)
+            else:  
+              print(k,newData)  
+              processed_data[str(k)] = [newData]
+            rank += 1
         #keep a year ago data for calculating top movers and loosers
         if fname == year_ago_filename:
-            year_ago_data = current_tags
-with open(join('result', 'data.json'), 'w+') as f:
+           year_ago_data = current_tags
+     
+with open(join('result', 'tagdata.json'), 'w+') as f:
     json.dump(processed_data, f)
 
 #calculate top movers and losers
@@ -75,6 +86,7 @@ for tag in current_tags["tags"]:
     #if not found in last year data
     #TODO better for 100% calculation
     if change == None:
+        print(tag["tag"])
         change = 100
         rank = tag["rank"]
     changes.append({"tag": tag["tag"], "rank": int(rank), "change": int(change), "rank_change": rank_change})
