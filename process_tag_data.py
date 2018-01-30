@@ -44,7 +44,8 @@ synonyms = {
     'vue': 'vue.js',
     'vue2': 'vue.js',
     'vuejs': 'vue.js',
-    'postgres': 'postgresql'
+    'postgres': 'postgresql',
+    'spark' : 'apache-spark'
 }
 onlyfiles = [f for f in listdir('new') if isfile(join('new', f)) and f.endswith("json")]
 onlyfiles.sort()
